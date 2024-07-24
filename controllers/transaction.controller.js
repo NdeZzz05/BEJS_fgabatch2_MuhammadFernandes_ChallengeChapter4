@@ -1,4 +1,4 @@
-const POOL = require("../db");
+const POOL = require("../config/db");
 
 getTransaction = async (req, res) => {
   try {

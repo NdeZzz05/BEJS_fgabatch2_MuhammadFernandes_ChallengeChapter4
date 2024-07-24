@@ -1,4 +1,4 @@
-const POOL = require("../db");
+const POOL = require("../config/db");
 
 const RESPONSE = (res, message, data) => {
   return res.status(200).json({

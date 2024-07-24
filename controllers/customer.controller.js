@@ -1,11 +1,16 @@
-const POOL = require("../db");
+const POOL = require("../config/db");
+const CUSTOMER = require("../models/customer.model");
 
 getCustomer = async (req, res) => {
   try {
-    const result = await POOL.query(`select *
-        from customer
-        inner join address on customer.id_address = address.id
-      `);
+    // sebelum dipisah/tidak menggunakan folder models
+    // const result = await POOL.query(`select *
+    //     from customer
+    //     inner join address on customer.id_address = address.id
+    //   `);
+
+    // sesudah dipisah & menggunakan folder models
+    const result = await CUSTOMER.index();
     res.status(200).json({
       success: true,
       message: "Berhasil mendapatakan customer",
@@ -20,14 +25,18 @@ getCustomer = async (req, res) => {
 getCustomerDetail = async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await POOL.query(
-      `select *
-	from customer
-	inner join address on customer.id_address = address.id
-	where customer.id = $1;
-          `,
-      [id]
-    );
+    // sebelum dipisah/tidak menggunakan folder models
+    //   const result = await POOL.query(
+    //     `select *
+    // from customer
+    // inner join address on customer.id_address = address.id
+    // where customer.id = $1;
+    //         `,
+    //     [id]
+    //   );
+
+    // sesudah dipisah & menggunakan folder models
+    const result = await CUSTOMER.getById(id);
     res.status(200).json({
       success: true,
       message: "Berhasil mendapatakan detail customer",
